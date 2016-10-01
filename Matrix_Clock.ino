@@ -12,10 +12,10 @@ void setup()
 
 void loop()
 {
-	uint32_t theme[8] = {0x00FF00, 0xFFFF00, 0x00FF00, 0x00FFFF, 0xFFFFFF, 0x00FF00, 0xFFFFFF, 0xFFFFFF};
-	drawTime(getTime(), theme);
-	delay(1000);
-	
+	uint32_t theme[8] = {0xFF0000, 0xFFFF00, 0x00FF00, 0x00FFFF, 0xFFFFFF, 0x0000FF, 0xFF00FF, 0xFFFFFF};
+	clockWithSeconds(theme);
+	while (millis() % 1000 > 5)
+		yield();
 	
 	
 }

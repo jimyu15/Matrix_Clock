@@ -18,6 +18,57 @@
 #define TEN      0x1010100
 #define ELEVEN   0x3F00
 #define TWELVE   0xF600
+const uint64_t digit0[] = {
+  0x609090909090906,
+  0x602020202020207,
+  0x60909010204080f,
+  0x609010602010906,
+  0x60a0a0a0a0f0202,
+  0xf08080e01010906,
+  0x609080e09090906,
+  0xf01010204040404,
+  0x609090609090906,
+  0x609090907010906,
+};
+
+const uint64_t digit1[] = {
+  0x6090909090909060,
+  0x6020202020202070,
+  0x60909010204080f0,
+  0x6090106020109060,
+  0x60a0a0a0a0f02020,
+  0xf08080e010109060,
+  0x609080e090909060,
+  0xf010102040404040,
+  0x6090906090909060,
+  0x6090909070109060,
+};
+
+const uint64_t smallDigit0[] = {
+  0x40a0a0a0a04,
+  0x40c0404040e,
+  0xc020204080e,
+  0xc020c02020c,
+  0x2060a0a0e02,
+  0xe080c02020c,
+  0x6080c0a0a04,
+  0xe0204040404,
+  0x40a040a0a04,
+  0x40a0a06020c,
+};
+const uint64_t smallDigit1[] = {
+  0x205050505020,
+  0x206020202070,
+  0x601010204070,
+  0x601060101060,
+  0x103050507010,
+  0x704060101060,
+  0x304060505020,
+  0x701020202020,
+  0x205020505020,
+  0x205050301060,
+};
+
 
 void fillMatrix(uint32_t color)
 {
@@ -78,7 +129,6 @@ void drawMatrix(uint64_t bitmap, uint32_t color1, uint32_t color2)
 
 void drawTime(DateTime time, uint32_t theme[])
 {
-	fillMatrix(0);
 	uint64_t bitmap;
 	switch (time.minute() / 5)
 	{
@@ -178,5 +228,16 @@ void drawTime(DateTime time, uint32_t theme[])
 	drawMatrix(bitmap, theme[4], theme[5]);
 	for (int i = 0; i < 4; i++)
 		setCorner(i, (i < time.minute() % 5) ? theme[6] : 0);
-	ledRefresh();
+}
+
+void drawNumber(uint8_t n, uint32_t color)
+{
+	n %= 100;
+	drawMatrix(digit0[n % 10] | digit1[n / 10], color);
+}
+
+void drawSmallNumber(uint8_t n, uint32_t color)
+{
+	n %= 100;
+	drawMatrix(smallDigit0[n % 10] | smallDigit1[n / 10], color);
 }

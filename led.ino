@@ -38,7 +38,7 @@ void ledInit()
 {
 	corners.begin();
 	corners.setBrightness(80);
-	matrixWhiteBal(60, 60, 60);
+	matrixWhiteBal(15, 35, 31);
 }
 
 void setMatrix(uint8_t x, uint8_t y, uint8_t r, uint8_t g, uint8_t b)

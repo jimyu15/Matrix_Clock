@@ -18,7 +18,7 @@ void ColorFill(unsigned char R,unsigned char G,unsigned char B)
 void setup() 
 {
   Colorduino.Init();
-  unsigned char whiteBalVal[3] = {18,31,31};
+  unsigned char whiteBalVal[3] = {15,35,31};
   Colorduino.SetWhiteBal(whiteBalVal);
   ColorFill(255,255,255);
   Serial.begin(115200);
